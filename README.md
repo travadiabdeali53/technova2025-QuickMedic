@@ -9,7 +9,6 @@ QuickMedic acts as a "Digital Hospital" that unifies all medical services into o
 
 Unified Ecosystem: Users can book appointments, order medicines, and download lab reports from a single interface.
 
-Voice-Activated SOS (Key Innovation): Using the Web Speech API, the system constantly listens for distress keywords like "Help" or "Ambulance." If a patient shouts these words, the system automatically triggers an SOS alert without any physical touch.
 
 AI Symptom Triage: A built-in chatbot analyzes user symptoms (e.g., "fever") and provides immediate first-aid advice and doctor recommendations.
 
@@ -17,6 +16,7 @@ Smart Navigation: Users can navigate the entire site using voice commands (e.g.,
 
 Tech Stack Used
 Frontend: HTML5, CSS3 (Custom Glassmorphism & Dark Mode)
+
 
 Scripting: JavaScript (ES6+)
 
@@ -29,3 +29,7 @@ Custom JS Logic: For rule-based Chatbot response handling.
 Hosting: GitHub Pages (Static Deployment)
 
 Setup Instructions (How to Run)
+
+Team Members Name : Abdeali Travadi
+                    Quresh Antri
+                    Devanshi Trivedi
