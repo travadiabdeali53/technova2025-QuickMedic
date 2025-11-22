@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment - QuickMedic</title>
+    <link rel="stylesheet" href="static/style.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="toast-box"></div>
+
+    <header>
+        <div class="brand">
+            <img src="static/logo.jpg" alt="Logo">
+            <div>
+                <h1>QuickMedic</h1>
+                <h3>Book Appointment</h3>
+            </div>
+        </div>
+
+        <div class="menu-icon" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+
+        <nav id="navLinks">
+            <nav><a href="/"><i class="fas fa-arrow-left"></i> Back To Home</a></nav>
+        </nav>
+    </header>
+
+    <section class="split-container">
+        <div class="info-card">
+            <h2>Find a Specialist</h2>
+            <p>Select a department and doctor to proceed with your consultation.</p>
+            <div style="margin-top: 30px; display: flex; flex-direction: column; gap: 20px;">
+                <div style="display: flex; align-items: center; gap: 15px; color: #d5ecff;">
+                    <i class="fas fa-user-md" style="color: #0ab6ff; font-size: 1.4rem;"></i>
+                    <span>Verified Specialists</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 15px; color: #d5ecff;">
+                    <i class="fas fa-video" style="color: #0ab6ff; font-size: 1.4rem;"></i>
+                    <span>Video or In-Clinic</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-card">
+            <form id="bookingForm">
+                <div class="input-group">
+                    <label>Patient Name</label>
+                    <input type="text" value="Antri Quresh Y" readonly> 
+                </div>
+
+                <div class="input-group">
+                    <label>Department</label>
+                    <select id="deptSelect" onchange="updateDoctors()">
+                        <option value="">-- Select Department --</option>
+                        <option value="General">General Physician</option>
+                        <option value="Cardiology">Cardiology</option>
+                        <option value="Dermatology">Dermatology</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label>Select Doctor</label>
+                    <select id="doctorSelect">
+                        <option value="">-- Select Department First --</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label>Preferred Date</label>
+                    <input type="date" id="dateSelect">
+                </div>
+
+                <div class="input-group">
+                    <label>Upload Reports (Optional)</label>
+                    <input type="file" id="actual-btn" hidden onchange="updateFileName()">
+                    <label for="actual-btn" class="upload-label">
+                        <i class="fas fa-cloud-upload-alt"></i> Choose File
+                    </label>
+                    <span id="file-chosen" style="margin-left: 10px; color: #b7d7ff; font-size: 0.9rem;">No file chosen</span>
+                </div>
+
+                <div class="input-group">
+                    <label>Describe Symptoms</label>
+                    <textarea rows="3" placeholder="e.g., fever, headache..."></textarea>
+                </div>
+
+                <button type="button" onclick="confirmBooking()">Confirm Booking</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="brand"><h3>QuickMedic</h3></div>
+            <div class="copyright">&copy; 2025 QuickMedic. Designed by Antri Quresh Y.</div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById("navLinks").classList.toggle("active-menu");
+        }
+
+        function showToast(msg, isError) {
+            let toast = document.createElement("div");
+            toast.classList.add("toast");
+            if(isError) toast.style.borderLeft = "4px solid #ff3155";
+            toast.innerHTML = isError ? `<i class="fas fa-times-circle"></i> ${msg}` : `<i class="fas fa-check-circle"></i> ${msg}`;
+            document.getElementById("toast-box").appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+
+        function updateDoctors() {
+            const dept = document.getElementById("deptSelect").value;
+            const docSelect = document.getElementById("doctorSelect");
+            docSelect.innerHTML = "";
+            let doctors = [];
+            
+            if (dept === "General") doctors = ["Dr. Sharma (MBBS)", "Dr. Verma (MD)"];
+            else if (dept === "Cardiology") doctors = ["Dr. Patel (Cardiologist)", "Dr. Gupta (Surgeon)"];
+            else if (dept === "Dermatology") doctors = ["Dr. Nair (Skin)", "Dr. Lee (Cosmetologist)"];
+            else doctors = ["-- Select Department First --"];
+            
+            doctors.forEach(doc => {
+                let opt = document.createElement("option");
+                opt.text = doc; docSelect.add(opt);
+            });
+        }
+
+        function updateFileName() {
+            document.getElementById('file-chosen').textContent = document.getElementById('actual-btn').files[0].name;
+        }
+
+        function confirmBooking() {
+            if(document.getElementById("deptSelect").value === "") showToast("Please select a Department!", true);
+            else showToast("Appointment Request Sent Successfully!");
+        }
+    </script>
+</body>
+</html>

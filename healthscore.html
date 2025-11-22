@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medic - Health Score</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+/* Global Styles */
+* {margin:0; padding:0; box-sizing:border-box; font-family:"Segoe UI", Tahoma, Geneva, Verdana, sans-serif;}
+body {
+    background: radial-gradient(circle at top,#062642 0%,#04101e 45%,#020711 100%);
+    color:#f5f9fc;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    flex-direction:column;
+    padding:20px;
+}
+
+h1 {margin-bottom:20px; text-align:center; color:#0ab6ff;}
+
+/* Health Score Circle */
+.score-container {
+    position:relative;
+    width:200px;
+    height:200px;
+    margin-bottom:20px;
+}
+.score-container svg {transform: rotate(-90deg);}
+.score-container circle {fill:none; stroke-width:18; stroke-linecap:round;}
+.score-bg {stroke: rgba(255,255,255,0.1);}
+.score-progress {stroke: #0ab6ff; stroke-dasharray:565.48; stroke-dashoffset:565.48; transition: stroke-dashoffset 1s;}
+.score-text {
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    font-size:2rem;
+    font-weight:600;
+}
+
+/* Tips */
+.tips {max-width:320px; text-align:center; margin-top:15px; font-size:0.95rem;}
+.green {color:#22e0ff;}
+.yellow {color:#ffd700;}
+.red {color:#ff4d4d;}
+
+/* Responsive */
+@media(max-width:500px){
+    .score-container {width:150px; height:150px;}
+    .score-text {font-size:1.5rem;}
+    .tips {font-size:0.85rem;}
+}
+</style>
+</head>
+<body>
+
+<h1><i class="fa-solid fa-heart-pulse"></i> Your Health Score</h1>
+
+<div class="score-container">
+<svg width="200" height="200">
+  <circle class="score-bg" cx="100" cy="100" r="90"></circle>
+  <circle class="score-progress" cx="100" cy="100" r="90"></circle>
+</svg>
+<div class="score-text" id="scoreText">0</div>
+</div>
+
+<div class="tips" id="tips"></div>
+
+<script>
+// Example: lab results
+const labResults = {
+    bloodSugar: 110,    // mg/dL
+    cholesterol: 190,   // mg/dL
+    bpSystolic: 125,    // mmHg
+    bpDiastolic: 85     // mmHg
+};
+
+// Normalization function 0-100
+function normalize(value, min, max){
+    if(value <= min) return 100;
+    if(value >= max) return 0;
+    return Math.round(((max - value)/(max - min))*100);
+}
+
+// Weight of tests
+const weights = {bloodSugar:0.25, cholesterol:0.25, bp:0.5};
+const sugarScore = normalize(labResults.bloodSugar,70,120);
+const cholesterolScore = normalize(labResults.cholesterol,100,240);
+const bpScore = normalize((labResults.bpSystolic+labResults.bpDiastolic)/2,90,140);
+
+// Compute health score
+const healthScore = Math.round(sugarScore*weights.bloodSugar + cholesterolScore*weights.cholesterol + bpScore*weights.bp);
+
+// Update progress circle
+const progressCircle = document.querySelector('.score-progress');
+const scoreText = document.getElementById('scoreText');
+scoreText.textContent = healthScore;
+const offset = 565.48 - (healthScore/100)*565.48;
+progressCircle.style.strokeDashoffset = offset;
+
+// Color coding
+if(healthScore>=80){
+    progressCircle.style.stroke="#22e0ff"; scoreText.className="score-text green";
+}else if(healthScore>=50){
+    progressCircle.style.stroke="#ffd700"; scoreText.className="score-text yellow";
+}else{
+    progressCircle.style.stroke="#ff4d4d"; scoreText.className="score-text red";
+}
+
+// Show tips
+const tips = document.getElementById('tips');
+if(healthScore>=80){
+    tips.innerHTML="Great! Keep maintaining your healthy habits.";
+}else if(healthScore>=50){
+    tips.innerHTML="Monitor your diet and lifestyle. Regular checkups recommended.";
+}else{
+    tips.innerHTML="Consult a doctor soon and follow a proper health plan.";
+}
+</script>
+
+</body>
+</html>

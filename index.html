@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickMedic - Dashboard</title>
+    <link rel="stylesheet" href="static/style.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="toast-box"></div>
+
+    <header>
+        <div class="brand">
+            <img src="static/logo.jpg" alt="Logo">
+            <div>
+                <h1>QuickMedic</h1>
+                <h3>Unified Healthcare Platform</h3>
+            </div>
+        </div>
+
+        <div class="menu-icon" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+
+        <nav id="navLinks">
+            <a href="index.html">Home</a>
+            <a href="login.html" target="_blank">Login</a>
+            <a href="contacts.html" target="_blank">Contact</a>
+             <a href="helps.html" target="_blank">Help</a>
+            <a href="#">Help</a>
+        </nav>
+    </header>
+
+    <section class="hero-section">
+       <div class="hero-slide active-slide">
+    <div class="slide-container">
+        <div class="hero-text">
+            <h2>Your Health, Completely Digitized.</h2>
+            <p>Consult top specialists, order medicines, and manage reports from home.</p>
+            <a href="appointment.html"><button class="cta-btn">Book Consultation</button></a>
+        </div>
+        <div class="hero-img">
+            <img src="static/1.jpeg" alt="Doctor"> 
+            </div>
+    </div>
+</div>
+
+<div class="hero-slide">
+    <div class="slide-container">
+        <div class="hero-text">
+            <h2 style="color: #ff3155;">24/7 Emergency Support</h2>
+            <p>Medical emergencies don't wait. Get immediate ambulance assistance.</p>
+            <button class="cta-btn sos-btn" onclick="triggerSOS()">Request Help Now</button>
+        </div>
+        <div class="hero-img">
+            <img src="static/2.jpeg" alt="Ambulance">
+        </div>
+    </div>
+</div>
+
+<div class="hero-slide">
+    <div class="slide-container">
+        <div class="hero-text">
+            <h2 style="color: #ffd700;">Lab Tests at Home</h2>
+            <p>Schedule diagnostic tests and get samples collected from your home.</p>
+            <button class="cta-btn">Book a Test</button>
+        </div>
+        <div class="hero-img">
+            <img src="static/3.jpeg" alt="Lab">
+        </div>
+    </div>
+</div>
+    </section>
+
+    <section class="reveal">
+        <h2>Patient Services</h2>
+        <ul class="service-grid">
+    <li>
+        <h3><i class="fas fa-file-medical"></i> Health Records</h3>
+        <p>View medical history & prescriptions.</p>
+        <a href="records.html"><button>Open</button></a>
+    </li>
+
+    <li>
+        <h3><i class="fas fa-calendar-check"></i> Book Appointment</h3>
+        <p>Schedule doctor visits online.</p>
+        <a href="appointment.html"><button>Book Now</button></a>
+    </li>
+
+    <li>
+        <h3><i class="fas fa-flask"></i> Lab Tests</h3>
+        <p>Book diagnostic tests easily.</p>
+        <a href="labs.html"><button>View Reports</button></a>
+    </li>
+
+    <li>
+        <h3><i class="fas fa-pills"></i> Order Medicines</h3>
+        <p>Doorstep delivery of pharmacy items.</p>
+        <a href="medicine.html"><button>Order</button></a>
+    </li>
+
+    <li>
+        <h3><i class="fas fa-file-medical-alt"></i> Lab Reports</h3>
+        <p>Download and view your diagnostic reports.</p>
+        <a href="reports.html"><button>View Reports</button></a>
+    </li>
+
+    <li>
+        <h4><i class="fas fa-robot"></i> AI Symptom Helper</h4>
+        <p>Chat with our AI for quick advice.</p>
+        <button onclick="toggleChat()">Start Chat</button>
+    </li>
+    <li>
+        <h4><i class="fas fa-robot"></i>Health Score</h4>
+        <p>Check Real Time Health Score</p>
+         <a href="healthscore.html"><button>Check It</button></a>
+    </li>
+    <li>
+        <h3><i class="fas fa-ambulance"></i> Emergency</h3>
+        <p>Immediate emergency assistance.</p>
+        <button class="sos-btn" onclick="triggerSOS()">SOS</button>
+    </li>
+</ul>
+    </section>
+
+    <div class="chat-toggle" onclick="toggleChat()">
+        <i class="fas fa-robot"></i>
+    </div>
+    <div class="chat-window" id="aiChat">
+        <div class="chat-header">
+            <span>AI Assistant</span>
+            <i class="fas fa-times" onclick="toggleChat()"></i>
+        </div>
+        <div class="chat-body" id="chatBody">g
+            <div class="bot-msg">Hello! How can I help you today?</div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="userInput" placeholder="Type..." onkeypress="handleEnter(event)">
+            <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+  <footer class="qm-footer">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <h2>QuickMedic</h2>
+          <p>Your trusted unified digital healthcare partner.</p>
+        </div>
+
+        <div class="footer-links">
+          <h3>Useful Links</h3>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms & Conditions</a>
+          <a href="#">Support</a>
+          <a href="#">FAQs</a>
+        </div>
+
+        <div class="footer-contact">
+          <h3>Contact Us</h3>
+          <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+          <p><i class="fas fa-envelope"></i> support@quickmedic.com</p>
+          <p><i class="fas fa-map-marker-alt"></i> Bhavnagar, Gujarat</p>
+        </div>
+
+        <div class="footer-social">
+          <h3>Follow Us</h3>
+          <div class="social-icons">
+            <i class="fab fa-facebook"></i>
+            <i class="fab fa-instagram"></i>
+            <i class="fab fa-twitter"></i>
+            <i class="fab fa-linkedin"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2025 QuickMedic | Designed by Abdeali, Quresh & Devanshi</p>
+      </div>
+    </footer>
+
+    <script>
+        // 1. Mobile Menu
+        function toggleMenu() {
+            document.getElementById("navLinks").classList.toggle("active-menu");
+        }
+
+        // 2. Toast Notifications
+        function showToast(msg) {
+            let toast = document.createElement("div");
+            toast.classList.add("toast");
+            toast.innerText = msg;
+            document.getElementById("toast-box").appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+
+        function triggerSOS() {
+            let toast = document.createElement("div");
+            toast.classList.add("toast");
+            toast.style.borderLeft = "4px solid #ff3155";
+            toast.innerHTML = "🚨 SOS SIGNAL SENT! Ambulance Dispatched.";
+            document.getElementById("toast-box").appendChild(toast);
+            setTimeout(() => toast.remove(), 5000);
+        }
+
+        // 3. Hero Slider Logic
+        let slideIndex = 0;
+        const slides = document.querySelectorAll(".hero-slide");
+        const dots = document.querySelectorAll(".dot");
+
+        function showSlide(n) {
+            slides.forEach(s => s.classList.remove("active-slide"));
+            dots.forEach(d => d.classList.remove("active-dot"));
+            
+            if (n >= slides.length) slideIndex = 0;
+            else if (n < 0) slideIndex = slides.length - 1;
+            else slideIndex = n;
+
+            slides[slideIndex].classList.add("active-slide");
+            dots[slideIndex].classList.add("active-dot");
+        }
+
+        function nextSlide() { showSlide(slideIndex + 1); }
+        function manualSlide(n) { clearInterval(slideTimer); showSlide(n); slideTimer = setInterval(nextSlide, 5000); }
+        let slideTimer = setInterval(nextSlide, 5000);
+
+        // 4. Scroll Reveal Logic
+        window.addEventListener('scroll', () => {
+            let reveals = document.querySelectorAll('.reveal');
+            reveals.forEach(reveal => {
+                let windowHeight = window.innerHeight;
+                let elementTop = reveal.getBoundingClientRect().top;
+                if (elementTop < windowHeight - 100) reveal.classList.add('active-reveal');
+            });
+        });
+
+        // 5. Chatbot Logic
+        function toggleChat() {
+            let chat = document.getElementById("aiChat");
+            chat.style.display = (chat.style.display === "flex") ? "none" : "flex";
+        }
+        // Updated Chatbot Logic to talk to Python
+    async function sendMessage() {
+        let input = document.getElementById("userInput");
+        let body = document.getElementById("chatBody");
+        let text = input.value.trim();
+        if(!text) return;
+
+        // 1. Show User Message
+        let uDiv = document.createElement("div");
+        uDiv.className = "user-msg";
+        uDiv.innerText = text;
+        body.appendChild(uDiv);
+        input.value = "";
+        body.scrollTop = body.scrollHeight;
+
+        // 2. Send to Python Backend
+        try {
+            const response = await fetch('/api/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: text })
+            });
+            
+            const data = await response.json();
+            
+            // 3. Show Python AI Reply
+            let bDiv = document.createElement("div");
+            bDiv.className = "bot-msg";
+            bDiv.innerText = data.reply; // This comes from app.py
+            body.appendChild(bDiv);
+            body.scrollTop = body.scrollHeight;
+
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    }
+    </script>
+</body>
+</html>

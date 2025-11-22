@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pharmacy - QuickMedic</title>
+    <link rel="stylesheet" href="static/style.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div id="toast-box"></div>
+
+    <header>
+        <div class="brand">
+            <img src="static/logo.jpg" alt="Logo">
+            <div><h1>QuickMedic</h1><h3>Online Pharmacy</h3></div>
+        </div>
+        <nav>
+            <nav><a href="/"><i class="fas fa-arrow-left"></i> Back To Home</a></nav>
+            <a href="#"><i class="fas fa-shopping-cart"></i> Cart (0)</a>
+        </nav>
+    </header>
+
+    <section>
+        <h2>Best Sellers</h2>
+        <div class="product-grid">
+            <div class="product-card reveal">
+                <img src="https://cdn-icons-png.flaticon.com/512/883/883407.png" class="product-img">
+                <h3>Paracetamol 500mg</h3>
+                <p>10 Tablets / Strip</p>
+                <div class="price">₹30.00</div>
+                <button onclick="addToCart('Paracetamol')">Add to Cart</button>
+            </div>
+
+            <div class="product-card reveal">
+                <img src="https://cdn-icons-png.flaticon.com/512/3022/3022137.png" class="product-img">
+                <h3>Vitamin C Serum</h3>
+                <p>Immunity Booster</p>
+                <div class="price">₹150.00</div>
+                <button onclick="addToCart('Vitamin C')">Add to Cart</button>
+            </div>
+
+            <div class="product-card reveal">
+                <img src="https://cdn-icons-png.flaticon.com/512/1500/1500429.png" class="product-img">
+                <h3>Cough Syrup</h3>
+                <p>100ml Bottle</p>
+                <div class="price">₹85.00</div>
+                <button onclick="addToCart('Cough Syrup')">Add to Cart</button>
+            </div>
+            
+            <div class="product-card reveal">
+                <img src="https://cdn-icons-png.flaticon.com/512/2965/2965300.png" class="product-img">
+                <h3>N95 Mask</h3>
+                <p>Pack of 5</p>
+                <div class="price">₹200.00</div>
+                <button onclick="addToCart('N95 Mask')">Add to Cart</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="brand"><h3>QuickMedic</h3></div>
+            <div class="copyright">&copy; 2025 QuickMedic.</div>
+        </div>
+    </footer>
+
+    <script>
+        function addToCart(item) {
+            let toast = document.createElement("div");
+            toast.classList.add("toast");
+            toast.innerHTML = `<i class="fas fa-check-circle"></i> Added ${item} to Cart!`;
+            document.getElementById("toast-box").appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+    </script>
+</body>
+</html>

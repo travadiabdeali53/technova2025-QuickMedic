@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medic - Contact Us</title>
+
+<!-- Font Awesome for Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+/* ---------- CSS ---------- */
+
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: radial-gradient(circle at top, #062642 0%, #04101e 45%, #020711 100%);
+    color: #f5f9fc;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+/* Layout Wrapper */
+section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Section Titles */
+h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #ffffff;
+    text-align: center;
+}
+
+p {
+    color: #c0d9ff;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Contact List */
+ul.contact-info {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 18px;
+    padding-left: 0;
+    margin-bottom: 40px;
+}
+
+li.contact-card {
+    background: radial-gradient(circle at top left, rgba(10, 182, 255, 0.28), rgba(4, 16, 30, 0.96));
+    border-radius: 18px;
+    padding: 16px 18px;
+    border: 1px solid rgba(34, 224, 255, 0.2);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.45);
+    backdrop-filter: blur(6px);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+li.contact-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+    border-color: rgba(34, 224, 255, 0.6);
+}
+
+li.contact-card h3 {
+    margin-bottom: 6px;
+    font-size: 1.2rem;
+    color: #ffffff;
+}
+
+li.contact-card p a { 
+    color: #22e0ff; 
+    text-decoration: none; 
+}
+li.contact-card p a:hover { 
+    text-decoration: underline; 
+    color: #0ab6ff; 
+}
+
+/* Form Styling */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: radial-gradient(circle at top left, rgba(10, 182, 255, 0.2), rgba(4, 16, 30, 0.9));
+    padding: 20px;
+    border-radius: 16px;
+    border: 1px solid rgba(34, 224, 255, 0.3);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.45);
+    margin-bottom: 30px;
+}
+
+form input, form textarea {
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-size: 0.95rem;
+    width: 100%;
+}
+
+form textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+form button {
+    margin-top: 10px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 10px 18px;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    background-image: linear-gradient(135deg, #0ab6ff, #22e0ff);
+    color: #02101f;
+    box-shadow: 0 6px 16px rgba(10, 182, 255, 0.55);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    align-self: center;
+}
+
+form button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 22px rgba(10, 182, 255, 0.7);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    ul.contact-info { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<section>
+    <h2>Contact Us</h2>
+    <p>Reach out to us or fill the form below to send a message.</p>
+
+    <!-- Contact Info Cards -->
+    <ul class="contact-info">
+        <li class="contact-card">
+            <h3><i class="fa-brands fa-whatsapp"></i> WhatsApp</h3>
+            <p><a href="https://wa.me/911234567890" target="_blank">+91 12345 67890</a></p>
+        </li>
+        <li class="contact-card">
+            <h3><i class="fa-brands fa-instagram"></i> Instagram</h3>
+            <p><a href="https://instagram.com/medic_platform" target="_blank">@medic_platform</a></p>
+        </li>
+        <li class="contact-card">
+            <h3><i class="fa-solid fa-phone"></i> Mobile</h3>
+            <p><a href="tel:+911234567890">+91 12345 67890</a></p>
+        </li>
+        <li class="contact-card">
+            <h3><i class="fa-solid fa-envelope"></i> Email</h3>
+            <p><a href="mailto:support@medic.com">support@medic.com</a></p>
+        </li>
+        <li class="contact-card">
+            <h3><i class="fa-solid fa-location-dot"></i> Address</h3>
+            <p>123 Medic Street, Healthcare City, Gujarat, India</p>
+        </li>
+    </ul>
+
+    <!-- Contact Form -->
+    <form id="contactForm">
+        <input type="text" id="name" placeholder="Full Name" required>
+        <input type="email" id="email" placeholder="Email Address" required>
+        <input type="tel" id="phone" placeholder="Mobile Number" required>
+        <textarea id="message" placeholder="Your Message" required></textarea>
+        <button type="submit"><i class="fa-solid fa-paper-plane"></i> Send Message</button>
+    </form>
+
+</section>
+
+<script>
+document.getElementById("contactForm").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const message = document.getElementById("message").value.trim();
+
+    if(!name || !email || !phone || !message){
+        alert("Please fill in all fields before submitting!");
+        return;
+    }
+
+    alert(`Thank you, ${name}! Your message has been received.\nWe will contact you at ${email} or ${phone}.`);
+
+    document.getElementById("contactForm").reset();
+});
+</script>
+
+</body>
+</html>

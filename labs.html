@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medic - Top Labs & Packages</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+* {margin:0; padding:0; box-sizing:border-box; font-family:"Segoe UI", Tahoma, Geneva, Verdana, sans-serif;}
+body {background: radial-gradient(circle at top,#062642 0%,#04101e 45%,#020711 100%); color:#f5f9fc; line-height:1.6; padding:20px;}
+section {max-width:1000px; margin:0 auto; padding:20px;}
+h2 {font-size:2rem; margin-bottom:10px; color:#fff; text-align:center;}
+p {color:#c0d9ff; margin-bottom:20px; text-align:center;}
+input, button {padding:10px 14px; border-radius:8px; border:none; outline:none; font-size:0.95rem;}
+input {width:70%; margin-right:10px;}
+button {background-image: linear-gradient(135deg, #0ab6ff, #22e0ff); color:#02101f; cursor:pointer; font-weight:600; transition: transform 0.15s ease, box-shadow 0.15s ease;}
+button:hover {transform: translateY(-1px); box-shadow: 0 8px 22px rgba(10,182,255,0.7);}
+ul#labsList {list-style:none; margin-top:20px; display:grid; grid-template-columns: repeat(auto-fit,minmax(300px,1fr)); gap:16px; padding-left:0;}
+li.lab-card {background: radial-gradient(circle at top left, rgba(10,182,255,0.2), rgba(4,16,30,0.95)); border-radius:16px; padding:16px; border:1px solid rgba(34,224,255,0.2); box-shadow:0 10px 25px rgba(0,0,0,0.45);}
+li.lab-card h3 {font-size:1.2rem; margin-bottom:6px; color:#fff;}
+li.lab-card h4 {color:#22e0ff; font-size:1rem; margin:6px 0;}
+li.lab-card ul {list-style:none; padding-left:10px; margin-top:8px;}
+li.lab-card ul li {font-size:0.95rem; margin-bottom:4px; color:#d0e4ff;}
+@media(max-width:768px){input{width:100%; margin-bottom:10px;} button{width:100%;}}
+</style>
+</head>
+<body>
+
+<section>
+<h2><i class="fa-solid fa-hospital"></i> Top Labs & Packages</h2>
+<p>Enter a city or use your location to see top labs and available reports/packages.</p>
+
+<div style="text-align:center; margin-bottom: 20px;">
+    <input type="text" id="city" placeholder="Enter city (optional)">
+    <button onclick="searchByCity()"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+    <button onclick="getLocation()"><i class="fa-solid fa-map-marker-alt"></i> Use My Location</button>
+</div>
+
+<ul id="labsList"></ul>
+</section>
+
+<script>
+// Sample labs
+const labs = [
+    {
+        name: "HealthLab A",
+        city: "Ahmedabad",
+        lat: 23.0225,
+        lng: 72.5714,
+        tests: [
+            {name:"Blood Test", price:200}, {name:"X-Ray", price:500},
+            {name:"MRI", price:1200}, {name:"Urine Test", price:150},
+            {name:"CT Scan", price:1000}, {name:"COVID Test", price:700}
+        ],
+        packages: [
+            {name:"Basic Health Package", tests:["Blood Test","Urine Test"], price:320},
+            {name:"Advanced Imaging Package", tests:["X-Ray","MRI","CT Scan"], price:2500}
+        ]
+    },
+    {
+        name: "MediCheck B",
+        city: "Ahmedabad",
+        lat: 23.0300,
+        lng: 72.5800,
+        tests: [
+            {name:"Blood Test", price:180}, {name:"X-Ray", price:480},
+            {name:"MRI", price:1150}, {name:"Allergy Test", price:500}
+        ],
+        packages: [
+            {name:"Full Body Checkup", tests:["Blood Test","X-Ray","MRI"], price:1800}
+        ]
+    },
+    {
+        name: "CareLab C",
+        city: "Bhavnagar",
+        lat: 21.7645,
+        lng: 72.1519,
+        tests: [
+            {name:"Blood Test", price:220}, {name:"Urine Test", price:150},
+            {name:"Liver Function", price:400}, {name:"Kidney Function", price:400}
+        ],
+        packages: [
+            {name:"Health Checkup Package", tests:["Blood Test","Urine Test","Liver Function"], price:700}
+        ]
+    },
+    {
+        name: "LabCorp D",
+        city: "Bhavnagar",
+        lat: 21.7650,
+        lng: 72.1525,
+        tests: [
+            {name:"Thyroid Test", price:350}, {name:"Glucose Test", price:200}
+        ],
+        packages: [
+            {name:"Diabetes Package", tests:["Glucose Test"], price:180}
+        ]
+    },
+    {
+        name: "Prime Lab E",
+        city: "Ahmedabad",
+        lat: 23.0250,
+        lng: 72.5700,
+        tests: [
+            {name:"Blood Test", price:210}, {name:"Urine Test", price:160},
+            {name:"Vitamin D", price:400}
+        ],
+        packages: [
+            {name:"Vitamin Package", tests:["Vitamin D","Blood Test"], price:550}
+        ]
+    }
+];
+
+// Display labs
+function displayLabs(filteredLabs){
+    const labsList = document.getElementById("labsList");
+    labsList.innerHTML = "";
+    if(filteredLabs.length === 0){
+        labsList.innerHTML = "<li>No labs found.</li>";
+        return;
+    }
+    // Show only top 4 labs
+    filteredLabs.slice(0,4).forEach(lab=>{
+        const li = document.createElement("li");
+        li.classList.add("lab-card");
+        li.innerHTML = `<h3><i class="fa-solid fa-hospital"></i> ${lab.name}</h3>
+                        ${lab.distance !== undefined ? `<p>Distance: ${lab.distance.toFixed(2)}</p>` : ""}
+                        <h4>Tests:</h4>
+                        <ul>${lab.tests.map(t=>`<li>${t.name}: ₹${t.price}</li>`).join('')}</ul>
+                        ${lab.packages.length>0 ? `<h4>Packages:</h4>
+                        <ul>${lab.packages.map(p=>`<li>${p.name}: ₹${p.price}</li>`).join('')}</ul>` : ""}`;
+        labsList.appendChild(li);
+    });
+}
+
+// Search by city
+function searchByCity(){
+    const city = document.getElementById("city").value.trim().toLowerCase();
+    if(!city){ alert("Please enter a city or use GPS."); return; }
+    const nearbyLabs = labs.filter(lab=>lab.city.trim().toLowerCase() === city);
+    displayLabs(nearbyLabs);
+}
+
+// Get GPS location
+function getLocation(){
+    if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(position=>{
+            const userLat = position.coords.latitude;
+            const userLng = position.coords.longitude;
+            const nearbyLabs = labs.map(lab=>({...lab, distance:Math.sqrt(Math.pow(userLat-lab.lat,2)+Math.pow(userLng-lab.lng,2))}))
+                                    .sort((a,b)=>a.distance-b.distance);
+            displayLabs(nearbyLabs);
+        },()=>{alert("Enable GPS and try again.");});
+    } else { alert("Geolocation not supported."); }
+}
+</script>
+
+</body>
+</html>

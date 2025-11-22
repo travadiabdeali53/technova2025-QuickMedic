@@ -1,0 +1,47 @@
+/* mediaqueries.css - Professional Mobile Menu */
+@media (max-width: 768px) {
+    header {
+        position: relative;
+    }
+
+    .menu-icon {
+        display: block; /* Show icon on mobile */
+    }
+
+    nav {
+        position: absolute;
+        top: 100%; /* Push it below the header */
+        right: 0;
+        background: rgba(4, 16, 30, 0.95);
+        width: 0; /* Hidden by default (width 0) */
+        height: 100vh; /* Full screen height */
+        overflow: hidden;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        transition: width 0.4s ease; /* Smooth slide effect */
+        border-left: 1px solid rgba(34, 224, 255, 0.2);
+        z-index: 1000;
+    }
+
+    /* This class is added by JS to open the menu */
+    nav.active-menu {
+        width: 60%; /* Slide out to 60% of screen */
+        box-shadow: -10px 0 30px rgba(0,0,0,0.8);
+    }
+
+    nav a {
+        font-size: 1.2rem;
+        opacity: 0; /* Hide text initially */
+        transition: opacity 0.3s 0.2s; /* Delay text appearance */
+    }
+    
+    nav.active-menu a {
+        opacity: 1;
+    }
+    
+    /* Adjust Hero Text for Mobile */
+    .hero-section h2 { font-size: 1.6rem; }
+    .split-container { grid-template-columns: 1fr; }
+}
